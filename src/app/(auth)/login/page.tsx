@@ -10,14 +10,19 @@ export default function LoginPage() {
   const router = useRouter();
   const [form, setForm] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
+  const [demoLoading, setDemoLoading] = useState(false);
+
+  const login = async (email: string, password: string) => {
+    const { data } = await api.post("/api/v1/auth/login", { email, password });
+    localStorage.setItem("access_token", data.access_token);
+    router.push("/discover");
+  };
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const { data } = await api.post("/api/v1/auth/login", form);
-      localStorage.setItem("access_token", data.access_token);
-      router.push("/discover");
+      await login(form.email, form.password);
     } catch (err: unknown) {
       const msg =
         (err as { response?: { data?: { detail?: string } } })?.response?.data
@@ -25,6 +30,20 @@ export default function LoginPage() {
       toast.error(msg);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const demoLogin = async () => {
+    setDemoLoading(true);
+    try {
+      await login("demo@cheers.app", "Demo12345");
+    } catch (err: unknown) {
+      const msg =
+        (err as { response?: { data?: { detail?: string } } })?.response?.data
+          ?.detail ?? "Demo login failed";
+      toast.error(msg);
+    } finally {
+      setDemoLoading(false);
     }
   };
 
@@ -82,6 +101,21 @@ export default function LoginPage() {
               {loading ? "Signing in…" : "Sign in"}
             </button>
           </form>
+
+          <div className="flex items-center gap-3 my-5">
+            <div className="flex-1 h-px bg-[#E8E0D8]" />
+            <span className="text-xs text-[#C4BAB2] uppercase tracking-wide">or</span>
+            <div className="flex-1 h-px bg-[#E8E0D8]" />
+          </div>
+
+          <button
+            type="button"
+            onClick={demoLogin}
+            disabled={demoLoading}
+            className="w-full border border-[#8B1A2E] text-[#8B1A2E] py-3.5 rounded-xl font-semibold text-sm hover:bg-[#8B1A2E] hover:text-[#FAF5EF] transition-colors disabled:opacity-60"
+          >
+            {demoLoading ? "Loading demo…" : "Try demo (no signup)"}
+          </button>
         </div>
 
         <p className="text-center text-sm text-[#78716C] mt-6">
