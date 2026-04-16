@@ -3,6 +3,9 @@ import axios from "axios";
 export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
   withCredentials: true, // send refresh_token cookie
+  headers: {
+    "ngrok-skip-browser-warning": "true",
+  },
 });
 
 // Attach access token from store to every request
