@@ -39,15 +39,15 @@ export default function RegisterPage() {
       setForm({ ...form, [key]: e.target.value });
 
   return (
-    <div className="min-h-screen bg-[#FAF5EF] flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen bg-bg flex items-center justify-center px-4 py-12">
       <div className="w-full max-w-sm">
-        <Link href="/" className="font-display text-2xl text-[#8B1A2E] font-bold block text-center mb-10">
+        <Link href="/" className="font-display text-2xl text-brand font-bold block text-center mb-10">
           Cheers
         </Link>
 
-        <div className="bg-white rounded-3xl shadow-sm border border-[#E8E0D8] p-8">
-          <h1 className="font-display text-2xl text-[#1C1917] mb-1">Join Cheers</h1>
-          <p className="text-[#78716C] text-sm mb-8">Create your free account</p>
+        <div className="bg-white rounded-3xl shadow-sm border border-line p-8">
+          <h1 className="font-display text-2xl text-fg mb-1">Join Cheers</h1>
+          <p className="text-muted text-sm mb-8">Create your free account</p>
 
           <form onSubmit={submit} className="space-y-4">
             {[
@@ -57,7 +57,7 @@ export default function RegisterPage() {
               { key: "age" as const, label: "Age", type: "number", placeholder: "18+" },
             ].map(({ key, label, type, placeholder }) => (
               <div key={key}>
-                <label className="text-xs font-semibold text-[#78716C] uppercase tracking-wide block mb-1.5">
+                <label className="text-xs font-semibold text-muted uppercase tracking-wide block mb-1.5">
                   {label}
                 </label>
                 <input
@@ -66,7 +66,7 @@ export default function RegisterPage() {
                   value={form[key]}
                   onChange={field(key)}
                   min={key === "age" ? 18 : undefined}
-                  className="w-full border border-[#E8E0D8] rounded-xl px-4 py-3 text-sm text-[#1C1917] bg-[#FAF5EF] focus:outline-none focus:border-[#8B1A2E] transition-colors placeholder:text-[#C4BAB2]"
+                  className="w-full border border-line rounded-xl px-4 py-3 text-sm text-fg bg-bg focus:outline-none focus:border-brand transition-colors placeholder:text-subtle"
                   placeholder={placeholder}
                 />
               </div>
@@ -75,16 +75,16 @@ export default function RegisterPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#8B1A2E] text-[#FAF5EF] py-3.5 rounded-xl font-semibold text-sm hover:bg-[#5C1020] transition-colors disabled:opacity-60 mt-2"
+              className="w-full bg-brand text-white py-3.5 rounded-xl font-semibold text-sm hover:bg-brand-hover transition-colors disabled:opacity-60 mt-2"
             >
               {loading ? "Creating account…" : "Create account"}
             </button>
           </form>
         </div>
 
-        <p className="text-center text-sm text-[#78716C] mt-6">
+        <p className="text-center text-sm text-muted mt-6">
           Already have an account?{" "}
-          <Link href="/login" className="text-[#8B1A2E] font-medium hover:underline">
+          <Link href="/login" className="text-brand font-medium hover:underline">
             Sign in
           </Link>
         </p>

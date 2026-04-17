@@ -20,9 +20,28 @@ export const metadata: Metadata = {
   description: "Meet interesting people nearby",
 };
 
+const themeInitScript = `
+(function() {
+  try {
+    var raw = localStorage.getItem('cheers-theme');
+    var dark = false;
+    if (raw) {
+      var parsed = JSON.parse(raw);
+      dark = !!(parsed && parsed.state && parsed.state.dark);
+    } else {
+      dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    if (dark) document.documentElement.classList.add('dark');
+  } catch (e) {}
+})();
+`;
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${dmSans.variable} h-full`}>
+    <html lang="en" className={`${playfair.variable} ${dmSans.variable} h-full`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body className="h-full">
         <Providers>{children}</Providers>
       </body>

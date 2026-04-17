@@ -1,13 +1,47 @@
 @import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --bg: #FAF5EF;
+  --surface: #FFFFFF;
+  --surface-2: #FAF5EF;
+  --surface-hover: #F3ECE2;
+  --line: #E8E0D8;
+  --fg: #1C1917;
+  --muted: #78716C;
+  --subtle: #C4BAB2;
+  --ink: #1C1917;
+}
+
+.dark {
+  --bg: #1B1C1D;
+  --surface: #28292A;
+  --surface-2: #313335;
+  --surface-hover: #3C4043;
+  --line: #3C4043;
+  --fg: #E3E3E3;
+  --muted: #9AA0A6;
+  --subtle: #5F6368;
+  --ink: #131416;
+}
 
 @theme inline {
-  --color-cream:   #FAF5EF;
-  --color-wine:    #8B1A2E;
-  --color-wine-dark: #5C1020;
-  --color-gold:    #C9963F;
-  --color-charcoal: #1C1917;
-  --color-muted:   #78716C;
-  --color-border:  #E8E0D8;
+  --color-bg:            var(--bg);
+  --color-surface:       var(--surface);
+  --color-surface-2:     var(--surface-2);
+  --color-surface-hover: var(--surface-hover);
+  --color-line:          var(--line);
+  --color-fg:            var(--fg);
+  --color-muted:         var(--muted);
+  --color-subtle:        var(--subtle);
+
+  --color-ink:           var(--ink);
+
+  --color-brand:         #8B1A2E;
+  --color-brand-hover:   #5C1020;
+  --color-brand-soft:    #A83347;
+  --color-gold:          #C9963F;
+  --color-gold-dark:     #8B6A28;
 
   --font-playfair: var(--font-playfair);
   --font-dm:       var(--font-dm);
@@ -22,12 +56,20 @@ html, body {
 }
 
 body {
-  background-color: #FAF5EF;
-  color: #1C1917;
+  background-color: var(--bg);
+  color: var(--fg);
   font-family: var(--font-dm), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  transition: background-color 180ms ease, color 180ms ease;
 }
 
 .font-display {
   font-family: var(--font-playfair), Georgia, serif;
+}
+
+input, textarea, select {
+  color-scheme: light;
+}
+.dark input, .dark textarea, .dark select {
+  color-scheme: dark;
 }

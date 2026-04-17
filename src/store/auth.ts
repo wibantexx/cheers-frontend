@@ -1,6 +1,11 @@
 import { create } from "zustand";
 import { api } from "@/lib/api";
 
+interface PromptAnswer {
+  q: string;
+  a: string;
+}
+
 interface User {
   id: string;
   username: string;
@@ -11,6 +16,14 @@ interface User {
   city?: string;
   is_verified: boolean;
   created_at: string;
+  arsenal_have: string[];
+  arsenal_want: string[];
+  mood?: string | null;
+  interests: string[];
+  prompts: PromptAnswer[];
+  last_seen?: string | null;
+  latitude?: number | null;
+  longitude?: number | null;
 }
 
 interface AuthStore {

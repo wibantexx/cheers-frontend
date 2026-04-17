@@ -19,28 +19,28 @@ function VerifyContent() {
   }, [token, router]);
 
   return (
-    <div className="min-h-screen bg-[#FAF5EF] flex items-center justify-center px-4">
+    <div className="min-h-screen bg-bg flex items-center justify-center px-4">
       <div className="text-center max-w-sm">
-        <div className="font-display text-2xl text-[#8B1A2E] font-bold mb-10">Cheers</div>
+        <div className="font-display text-2xl text-brand font-bold mb-10">Cheers</div>
         {status === "loading" && (
           <>
-            <div className="w-12 h-12 border-4 border-[#E8E0D8] border-t-[#8B1A2E] rounded-full animate-spin mx-auto mb-4" />
-            <p className="text-[#78716C]">Verifying your email…</p>
+            <div className="w-12 h-12 border-4 border-line border-t-brand rounded-full animate-spin mx-auto mb-4" />
+            <p className="text-muted">Verifying your email…</p>
           </>
         )}
         {status === "success" && (
           <>
             <div className="text-5xl mb-4">🥂</div>
-            <h1 className="font-display text-2xl text-[#1C1917] mb-2">Email verified!</h1>
-            <p className="text-[#78716C] text-sm">Redirecting you to sign in…</p>
+            <h1 className="font-display text-2xl text-fg mb-2">Email verified!</h1>
+            <p className="text-muted text-sm">Redirecting you to sign in…</p>
           </>
         )}
         {status === "error" && (
           <>
             <div className="text-5xl mb-4">😕</div>
-            <h1 className="font-display text-2xl text-[#1C1917] mb-2">Link invalid</h1>
-            <p className="text-[#78716C] text-sm mb-6">The link may have expired or already been used.</p>
-            <Link href="/login" className="text-[#8B1A2E] font-medium hover:underline text-sm">
+            <h1 className="font-display text-2xl text-fg mb-2">Link invalid</h1>
+            <p className="text-muted text-sm mb-6">The link may have expired or already been used.</p>
+            <Link href="/login" className="text-brand font-medium hover:underline text-sm">
               Back to sign in
             </Link>
           </>
